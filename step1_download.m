@@ -37,21 +37,21 @@ donors_links_FS={  'https://www.repository.cam.ac.uk/bitstream/handle/1810/26527
                    'https://www.repository.cam.ac.uk/bitstream/handle/1810/265272/donor15496.zip?sequence=5&isAllowed=y',...
                    'https://www.repository.cam.ac.uk/bitstream/handle/1810/265272/donor15697.zip?sequence=6&isAllowed=y'};
     
-link_table='https://www.repository.cam.ac.uk/bitstream/handle/1810/265272/StructureList_RRGedit.csv?sequence=7&isAllowed=y';            
+link_table='"https://www.repository.cam.ac.uk/bitstream/handle/1810/265272/StructureList_RRGedit.csv?sequence=7&isAllowed=y"';            
 
 
-mkdir('AIBS_map/Allen_FS/');                
-% Download table with structures names
-system(['wget -O AIBS_map/Allen_FS/StructureList_RRGedit.csv ' link_table]);
+%mkdir('AIBS_map/Allen_FS/');                
+%% Download table with structures names
+%system(['wget -O AIBS_map/Allen_FS/StructureList_RRGedit.csv ' link_table]);
+%
+%%Download fsaverage subject
+%link_fsaverage='"https://www.repository.cam.ac.uk/bitstream/handle/1810/265272/fsaverageSubP.zip?sequence=9&isAllowed=y"';
+%system(['wget -O AIBS_map/Allen_FS/fsaverageSubP.zip ' link_fsaverage]);
+%pause(15);
+%unzip('AIBS_map/Allen_FS/fsaverageSubP.zip','AIBS_map/Allen_FS/fsaverageSubP');
 
-%Download fsaverage subject
-link_fsaverage='https://www.repository.cam.ac.uk/bitstream/handle/1810/265272/fsaverageSubP.zip?sequence=9&isAllowed=y';            
-system(['wget -O AIBS_map/Allen_FS/fsaverageSubP.zip ' link_fsaverage]);
-pause(15);
-unzip('AIBS_map/Allen_FS/fsaverageSubP.zip','AIBS_map/Allen_FS/fsaverageSubP');
 
-
-
+disp('start processing')
 %Add auxiliar folder to include required functions
 path_auxiliar=which('main_sampleMatching');
 path_auxiliar=[path_auxiliar(1:end-22) '/auxiliar/'];
@@ -63,20 +63,20 @@ for ifol=1:numel(donors_name)
     donor_link=donors_links{ifol};
     donor_link_T1=donors_links_T1{ifol};
     donor_link_FS=donors_links_FS{ifol};
-    mkdir('AIBS_map/downloaded/');
+    %mkdir('AIBS_map/downloaded/');
 
     %Download freesurfer folder of each donor
-    system(['wget -O AIBS_map/Allen_FS/' donor_name '.zip ' donor_link_FS]);
-    pause(15);
-    unzip(['AIBS_map/Allen_FS/' donor_name '.zip'],['AIBS_map/Allen_FS/']);
+    %system(['wget -O AIBS_map/Allen_FS/' donor_name '.zip ' donor_link_FS]);
+    %pause(15);
+    %unzip(['AIBS_map/Allen_FS/' donor_name '.zip'],['AIBS_map/Allen_FS/']);
  
     
     %Download data from AIBS web
-    system(['wget -O AIBS_map/downloaded/' donor_name '.zip ' donor_link]);
-    pause(15);
-    unzip(['AIBS_map/downloaded/' donor_name '.zip'],['AIBS_map/downloaded/' donor_name]);
-    system(['wget -O AIBS_map/downloaded/' donor_name '/T1.nii.gz ' donor_link_T1]);
-    pause(15);
+    %system(['wget -O AIBS_map/downloaded/' donor_name '.zip ' donor_link]);
+    %pause(15);
+    %unzip(['AIBS_map/downloaded/' donor_name '.zip'],['AIBS_map/downloaded/' donor_name]);
+    %system(['wget -O AIBS_map/downloaded/' donor_name '/T1.nii.gz ' donor_link_T1]);
+    %pause(15);
 
     filename=['AIBS_map/downloaded/' donor_name '/Probes.csv'];
    
